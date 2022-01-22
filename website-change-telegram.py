@@ -9,13 +9,12 @@ import os
 import schedule
 import time
 from lxml import html
-from dotenv import load_dotenv
 
 # Send a message via a telegram bot
 def telegram_bot_sendtext(bot_message):
-    return
-    # TO-DO: change to a post
-    send_text = 'https://api.telegram.org/bot' + BOT_TOKEN + '/sendMessage?chat_id=' + TELEGRAM_USER_CHAT_ID + '&parse_mode=Markdown&text=' + bot_message
+    bot_token = ' '
+    bot_chatID = ' '
+    send_text = 'https://api.telegram.org/bot' + bot_token + '/sendMessage?chat_id=' + bot_chatID + '&parse_mode=Markdown&text=' + bot_message
 
     response = requests.get(send_text)
 
@@ -76,16 +75,12 @@ def stringify_children(node):
 def page_content(url):
     page = requests.get(url)
     tree = html.fromstring(page.text)
-    content_element = tree.xpath('//*[@id="column-2"]')[0]
+    content_element = tree.xpath('//div[@class="scrollingNotifications_New scrollbar"]')[0]
     return stringify_children(content_element)
-
-load_dotenv()
-BOT_TOKEN = os.getenv('BOT_TOKEN')
-TELEGRAM_USER_CHAT_ID = os.getenv('TELEGRAM_USER_CHAT_ID')
 
 # Initalize script to run every 2 minutes
 scan_url()
-# schedule.every(5).minutes.do(scan_url)
-# while True:
-#     schedule.run_pending()
-#     time.sleep(1)
+schedule.every(2).seconds.do(scan_url)
+while True:
+    schedule.run_pending()
+    time.sleep(1)

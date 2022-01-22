@@ -1,4 +1,10 @@
 # website-change-telegram
+Deploying your own
+
+#### The Easiest Way [Heroku ONLY 👾]
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 Python script that detects updates to urls, and sends a message via telegram.
 
 You can use whatever you would like to transmit a message with the update, a telegram bot message is provided as a base.
@@ -15,7 +21,7 @@ Install dependencies (create a virtual environment first if you need it):
 ```
 pip install -r requirements.txt
 ```
-
+https://heroku.com/deploy?template=https://github.com/craziks-creator/website-change-telegram/
 ## Usage
 
 Create a `.env` file with your bot token and the chat id. 
